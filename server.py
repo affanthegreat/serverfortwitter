@@ -1,6 +1,5 @@
 #web dev. framework
-from flask import Flask, render_template, request, redirect, url_for
-from joblib import load
+from flask import Flask, render_template, request
 from flask import jsonify
 #serializes data to JavaScript Object Notation (JSON) format
 
