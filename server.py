@@ -1,5 +1,6 @@
 #web dev. framework
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+import json 
 from flask import jsonify
 #serializes data to JavaScript Object Notation (JSON) format
 
@@ -15,11 +16,13 @@ def hello():
 def upload(page):
   return render_template(f"{page}.html")
 
-@app.route('/uploadimage',methods=['GET'])
+@app.route('/uploadimage',methods=['POST','GET'])
 def requestResults():
-    url = str(request.args["imageurl"])
-    text = str(request.args['text'])
-    filename = str(request.args['filename'])
+    me = json.loads(request.data)
+    print(me)
+    url = str(me["imageurl"])
+    text = str(me['text'])
+    filename = str(me['filename'])
     boilerplate = f'''
                  <head>
                   <meta name="twitter:card" content="summary" />
@@ -43,4 +46,4 @@ def requestResults():
 
 
 if __name__ == "__main__":
-  app.run()
+  app.run(port=12000)
